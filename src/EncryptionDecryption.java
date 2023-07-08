@@ -16,6 +16,9 @@ class EncDec implements Mode {
     List<Character> cyphered = new ArrayList<>(); // We can use StringBuilder instead of List.
     @Override
     public String shiftAlgo(int key, char[] data) {
+        if (Math.abs(key)> 26) {
+            key = key % 26;
+        }
         for (int i = 0; i < data.length; i++) {
             if (data[i] > 64 && data[i] < 91) {
                 if (data[i] + key > 90) {
@@ -37,6 +40,8 @@ class EncDec implements Mode {
                 cyphered.add(data[i]);
             }
         }
+//        String abc = cyphered.toString().replace(", ", "");
+//        System.out.println(abc.substring(1, abc.length() - 1));
         return cyphered.toString().replace(", ", "").replaceAll("\\[|\\]", "");
     }                           // replacing unwanted characters in List. removing sq. bracket and comma space.
 
